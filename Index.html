@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Interview</title>
+</head>
+<body>
+
+<h2>AI Interview Session</h2>
+
+<label>Name:</label><br>
+<input type="text" id="name"><br><br>
+
+<label>Role:</label><br>
+<input type="text" id="role"><br><br>
+
+<button onclick="startInterview()">Start Interview</button>
+
+<br><br>
+
+<video id="video" width="400" autoplay></video>
+
+<script>
+async function startInterview() {
+    const name = document.getElementById("name").value;
+    const role = document.getElementById("role").value;
+
+    if (!name || !role) {
+        alert("Please enter name and role");
+        return;
+    }
+
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    document.getElementById("video").srcObject = stream;
+
+    alert("Interview Started for " + name + " (" + role + ")");
+}
+</script>
+
+</body>
+</html>
