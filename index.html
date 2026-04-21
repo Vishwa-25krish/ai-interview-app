@@ -8,10 +8,10 @@
 <h2>AI Interview Session</h2>
 
 <label>Name:</label><br>
-<input type="text" id="name"><br><br>
+<input type="text" id="name" readonly><br><br>
 
 <label>Role:</label><br>
-<input type="text" id="role"><br><br>
+<input type="text" id="role" readonly><br><br>
 
 <button onclick="startInterview()">Start Interview</button>
 
@@ -20,12 +20,28 @@
 <video id="video" width="400" autoplay></video>
 
 <script>
+function getQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        name: params.get("name"),
+        role: params.get("role")
+    };
+}
+
+// Auto-fill values from URL
+window.onload = function () {
+    const { name, role } = getQueryParams();
+
+    if (name) document.getElementById("name").value = name;
+    if (role) document.getElementById("role").value = role;
+};
+
 async function startInterview() {
     const name = document.getElementById("name").value;
     const role = document.getElementById("role").value;
 
     if (!name || !role) {
-        alert("Please enter name and role");
+        alert("Missing candidate details");
         return;
     }
 
